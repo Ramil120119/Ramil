@@ -4,3 +4,4 @@ public class Main {
         System.out.println("Написал решение и скинул тебе!");
     }
 }
+// Задание 1 
