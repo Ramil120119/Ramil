@@ -3,4 +3,7 @@
 // не то
 
 public class Main {
+    public static void main(String[] args) {
+        // повтори/
+    }
 }
