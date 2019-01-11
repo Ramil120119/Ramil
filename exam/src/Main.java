@@ -4,6 +4,6 @@
 
 public class Main {
     public static void main(String[] args) {
-        // повтори/
+        // повтори/ дальше там лучше разное писать то есть например так
     }
 }
