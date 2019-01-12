@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 class Detal
@@ -34,9 +36,35 @@ class Detal
     }
 }
 
-class SimpleFrame2 extends JFrame {
 
-    public SimpleFrame2() {
+class ComparatorVes implements Comparator<Detal> {
+
+    public int compare(Detal a, Detal b){
+
+        if (a.ves>b.ves)
+            return -1;
+        if (a.ves<b.ves)
+            return 1;
+        return 0;
+    }
+}
+
+
+class ComporatorStoim implements Comparator<Detal> {
+
+    public int compare(Detal a, Detal b){
+
+        if (a.stoim>b.stoim)
+            return 1;
+        if (a.stoim<b.stoim)
+            return -1;
+        return 0;
+    }
+}
+
+class SimpleFrame extends JFrame {
+
+    public SimpleFrame() {
         Detal d1 = new Detal("jelezo","naznachenie1");
         Detal d2 = new Detal("med","naznachenie2");
         Detal d3 = new Detal("stal","naznachenie3");
@@ -51,9 +79,8 @@ class SimpleFrame2 extends JFrame {
         for (int i = 0; i<Detali.size(); i++)
         {
             Detali.get(i).Display();
-            System.out.println();
         }
-        SimpleFrame2.MyComponent c = new SimpleFrame2.MyComponent();
+        SimpleFrame.MyComponent c = new SimpleFrame.MyComponent();
         add(c);
         JButton btn = new JButton("Сортировка по весу по убыванию");
         JButton btn2 = new JButton("Сортировка по стоимости по возрастанию");
@@ -62,13 +89,26 @@ class SimpleFrame2 extends JFrame {
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
 
+                ComparatorVes cmp = new ComparatorVes();
+                Collections.sort(Detali,cmp);
+                System.out.println("Сортировка по весу по убыванию");
+                for (int i = 0; i<Detali.size(); i++)
+                {
+                    Detali.get(i).Display();
+                }
 
             }
         });
         btn2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
 
-                repaint();
+                ComporatorStoim cmp = new ComporatorStoim();
+                Collections.sort(Detali,cmp);
+                System.out.println("Сортировка по стоимости по возрастанию");
+                for (int i = 0; i<Detali.size(); i++)
+                {
+                    Detali.get(i).Display();
+                }
             }
         });
         setSize(1200,630);
@@ -86,6 +126,7 @@ class SimpleFrame2 extends JFrame {
 public class Main {
 
     public static void main(String[] args) {
-        new SimpleFrame2();
+        new SimpleFrame();
     }
 }
+// еще не все
