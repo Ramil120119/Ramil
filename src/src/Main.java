@@ -64,7 +64,7 @@ class ComporatorStoim implements Comparator<Detal> {
 
 class SimpleFrame extends JFrame {
 
-    public SimpleFrame() {
+    public SimpleFrame() throws MyException {
         Detal d1 = new Detal("jelezo","naznachenie1");
         Detal d2 = new Detal("med","naznachenie2");
         Detal d3 = new Detal("stal","naznachenie3");
@@ -76,9 +76,17 @@ class SimpleFrame extends JFrame {
         Detali.add(d3);
         Detali.add(d4);
         Detali.add(d5);
+        int granica = 70;// это можно менять, чем выше граница, тем больше шанс что исключение не вылетит
+                            // стоимость деталей в диапазоне [0;100) задаются, то есть если граница >= 100 исключения не будет
+        for (int i = 0; i<Detali.size(); i++)
+        {
+            if (Detali.get(i).stoim>granica)
+                throw new MyException();
+        }
         for (int i = 0; i<Detali.size(); i++)
         {
             Detali.get(i).Display();
+
         }
         SimpleFrame.MyComponent c = new SimpleFrame.MyComponent();
         add(c);
@@ -122,11 +130,19 @@ class SimpleFrame extends JFrame {
 
     }
 }
-
+class MyException extends Exception
+{
+    public MyException()
+    {
+        System.out.println("Стоимость детали превышает заданное");
+    }
+}
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyException {
         new SimpleFrame();
     }
 }
-// еще не все
+// остались комменты, по функциональности все
+// напиши коммент и закоммить если у тебя все работает, ну или напиши что не работает
+// если вылетает исключение, увеличь границу до 100. Внизу этой строки напиши коммент и закоммить
